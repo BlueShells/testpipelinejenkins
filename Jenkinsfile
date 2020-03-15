@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo "${gitlabSourceBranch}"
-                echo "ABC"
+                echo env.gitlabSourceRepoURL
+                echo env
             }
         }
     }

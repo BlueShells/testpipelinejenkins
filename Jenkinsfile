@@ -3,14 +3,11 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                checkout changelog: true, poll: true, scm: [
-                    $class: 'GitSCM',
-                    branches: [[name: "origin/${env.gitlabSourceBranch}"]],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [[$class: 'PreBuildMerge', options: [fastForwardMode: 'FF', mergeRemote: 'origin', mergeStrategy: 'DEFAULT', mergeTarget: "${env.gitlabTargetBranch}"]]],
-                    submoduleCfg: [],
-                    userRemoteConfigs: [[name: 'origin', url: 'git@gitlab.example.com:foo/testrepo.git']]
-                 ]
+                checkout([$class: 'GitSCM', branches: [[name: 'origin/${gitlabSourceBranch}']], 
+                doGenerateSubmoduleConfigurations: false, 
+                extensions: [], submoduleCfg: [], 
+                userRemoteConfigs: [[credentialsId: 'github-ssh', 
+                url: env.gitlabSourceRepoURL]]])
             }
         }
     }

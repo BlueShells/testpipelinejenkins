@@ -16,5 +16,14 @@ pipeline {
                 echo sha1
             }
         }
+        stage('getCode'){
+            steps{
+                git branch: ghprbSourceBranch,
+                    credentialsId: 'github-ssh',
+                    url: 'git@github.com:BlueShells/testpipelinejenkins.git'
+                sh 'pwd'
+                sh 'ls -al'
+            }
+        }
     }
 }

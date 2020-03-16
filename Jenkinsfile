@@ -27,7 +27,8 @@ pipeline {
         }
         stage('test'){
             steps{
-                sh '/usr/bin/pylint 1.py|| exit 0'
+                sh '/usr/bin/pylint 1.py>pylint_result.txt'
+                result = readFile('pylint_result').trim()
             }
         }
     }

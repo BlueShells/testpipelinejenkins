@@ -30,7 +30,7 @@ pipeline {
                 sh '/usr/bin/pylint 1.py>pylint_result.txt'
                 script {
                     result = readFile('pylint_result').trim()
-                    echo reuslt 
+                    echo $reuslt 
                     if (result.contains("C:")){
                       echo 'Failed'
                     }

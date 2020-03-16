@@ -28,8 +28,8 @@ pipeline {
         stage('test'){
             steps{
                 sh '/usr/bin/pylint 1.py>pylint_result.txt'
-                result = readFile('pylint_result').trim()
                 script {
+                    result = readFile('pylint_result').trim()
                     if (result.contains("C:")){
                       echo 'Failed'
                     }

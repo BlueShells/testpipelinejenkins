@@ -29,8 +29,10 @@ pipeline {
             steps{
                 sh '/usr/bin/pylint 1.py>pylint_result.txt'
                 result = readFile('pylint_result').trim()
-                if result.contains("C:"){
-                  echo 'Failed'
+                script {
+                    if result.contains("C:"){
+                      echo 'Failed'
+                    }
                 }
             }
         }

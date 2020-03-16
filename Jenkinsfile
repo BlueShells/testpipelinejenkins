@@ -25,5 +25,10 @@ pipeline {
                 sh 'ls -al'
             }
         }
+        stage('test'){
+            steps{
+                sh '/usr/bin/pylint 1.py|| exit 0'
+            }
+        }
     }
 }

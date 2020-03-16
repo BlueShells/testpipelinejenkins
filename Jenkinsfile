@@ -27,15 +27,16 @@ pipeline {
         }
         stage('test'){
             steps{
-                sh '/usr/bin/pylint 1.py>pylint_result.txt'
-                script {
-                    result = readFile('pylint_result').trim()
-                    echo $reuslt 
-                    if (result.contains("C:")){
-                      echo 'Failed'
-                    }
-                }
+                sh '/usr/bin/pylint 1.py>pylint_result.txt' 
             }
+        }
+        stage('read'){
+             steps {
+               script {
+                   def data = readFile(file: 'pylint_result.txt')
+                   println(data)
+               }
+             }
         }
     }
 }
